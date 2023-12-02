@@ -11,19 +11,26 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.translate(halfWidth, halfHeight);
     ctx.scale(1, -1);
     drawAxis();
+
     
-    document.getElementById('moveButton').addEventListener('click', function() {
+    document.getElementById('drawButton').addEventListener('click', function() {
         drawTriangle();
         drawLine();
     });
 
    
     function drawTriangle() {
+
         var firstVertexX = parseInt(document.getElementById('firstVertexX').value, 10);
         var firstVertexY = parseInt(document.getElementById('firstVertexY').value, 10);
         var secondVertexX = parseInt(document.getElementById('secondVertexX').value, 10);
         var secondVertexY = parseInt(document.getElementById('secondVertexY').value, 10);
         var heightInput = parseInt(document.getElementById('trianglesHeight').value, 10);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawAxis();
+
+
 
         console.log(firstVertexX);
         console.log(firstVertexY);
@@ -34,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         drawIsoscelesTriangle(firstVertexX * 10, firstVertexY * 10, secondVertexX * 10, secondVertexY * 10, heightInput * 10);
+
     }
 
 

@@ -143,11 +143,20 @@ body {
 }
 
 
-#renderButton, #moveButton {
+#renderButton,  #drawButton {
   height: 40px;
   width: 190px;
   border-radius: 30px;
   background-color: #D1729D;
+  margin-right: 10px;
+}
+
+#moveButton{
+  height: 40px;
+  width: 400px;
+  border-radius: 30px;
+  background-color: #D1729D;
+  margin-right: 10px;
 }
 
 #changeColorButton {
