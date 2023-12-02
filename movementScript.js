@@ -6,10 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.strokeStyle = 'black';
     canvas.width = document.getElementById("movement-container").offsetWidth;
     canvas.height = document.getElementById("movement-container").offsetHeight;
+    const halfWidth = canvas.width / 2;
+    const halfHeight = canvas.height / 2;
+    ctx.translate(halfWidth, halfHeight);
+    ctx.scale(1, -1);
     drawAxis();
     
     document.getElementById('moveButton').addEventListener('click', function() {
         drawTriangle();
+        drawLine();
     });
 
    
@@ -28,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-        drawIsoscelesTriangle(firstVertexX, firstVertexY, secondVertexX, secondVertexY, heightInput);
+        drawIsoscelesTriangle(firstVertexX * 10, firstVertexY * 10, secondVertexX * 10, secondVertexY * 10, heightInput * 10);
     }
 
 
@@ -64,22 +69,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function drawAxis() {
-        const width = canvas.width;
-        const height = canvas.height;
+        const width = ctx.canvas.width;
+        const height = ctx.canvas.height;
+        const halfWidth = width / 2;
+        const halfHeight = height / 2;
     
-        // X-axis
-        ctx.moveTo(0, height / 2);
-        ctx.lineTo(width, height / 2);
+        // Ensure the transformations are applied only within this function
+        ctx.save();
     
-        // Y-axis
-        ctx.moveTo(width / 2, 0);
-        ctx.lineTo(width / 2, height);
+        // Clear any existing transformations by resetting to the default state
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    
+        // Draw X-axis
+        ctx.beginPath();
+        ctx.moveTo(0, halfHeight);
+        ctx.lineTo(width, halfHeight);
+    
+        // Draw Y-axis
+        ctx.moveTo(halfWidth, 0);
+        ctx.lineTo(halfWidth, height);
     
         ctx.strokeStyle = 'black';
         ctx.stroke();
-        //ctx.closePath();
+        ctx.closePath();
+    
+        // Restore the transformations that were saved
+        ctx.restore();
     }
     
+
+    function drawLine() {
+        var A = parseFloat(document.getElementById('lineA').value);
+        var B = parseFloat(document.getElementById('lineB').value);
+        var C = parseFloat(document.getElementById('lineC').value);
+        console.log(A);
+        console.log(B);
+        console.log(C);
+
+
+        drawLinearEquation(A, B, C);
+    }
+
+    
+
+    function drawLinearEquation(A, B, C) {
+        ctx.beginPath();
+    
+        let x1 = -halfWidth;
+        let y1 = (-C - A * x1) / B;
+        let x2 = halfWidth;
+        let y2 = (-C - A * x2) / B;
+    
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+    }
     
 });
 
