@@ -7,13 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.width = document.getElementById("movement-container").offsetWidth;
     canvas.height = document.getElementById("movement-container").offsetHeight;
     drawAxis();
+
     
-    document.getElementById('moveButton').addEventListener('click', function() {
+    document.getElementById('drawButton').addEventListener('click', function() {
         drawTriangle();
     });
 
    
     function drawTriangle() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawAxis();
+
         var firstVertexX = document.getElementById('firstVertexX').value;
         
         var firstVertexY = document.getElementById('firstVertexY').value;
@@ -29,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-        drawIsoscelesTriangle(firstVertexX, firstVertexY, secondVertexX, secondVertexY, heightInput);
+        drawIsoscelesTriangle(firstVertexX, firstVertexY, secondVertexX, secondVertexY, heightInput*15);
     }
 
     function drawIsoscelesTriangle(baseApex1X, baseApex1Y, baseApex2X, baseApex2Y, height) {
