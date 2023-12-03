@@ -23,6 +23,14 @@ body {
   row-gap: 50px;
 }
 
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 .info-container-fractals {
   grid-column: 1;
   grid-row: 1;

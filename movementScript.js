@@ -24,11 +24,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     
     document.getElementById('drawButton').addEventListener('click', function() {
+        ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
+        drawAxis();
         drawTriangle();
         drawLine();
     });
 
     document.getElementById('moveButton').addEventListener('click', function() {
+        ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
+        drawAxis();
+        drawLine();
         reflectTriangle(currentBaseApex1X, currentBaseApex1Y, currentBaseApex2X, currentBaseApex2Y, currentTopApexX, currentTopApexY, currentA, currentB, currentC);
     });
    
@@ -39,21 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var secondVertexX = parseInt(document.getElementById('secondVertexX').value, 10);
         var secondVertexY = parseInt(document.getElementById('secondVertexY').value, 10);
         var heightInput = parseInt(document.getElementById('trianglesHeight').value, 10);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawAxis();
-
-
-
-        console.log(firstVertexX);
-        console.log(firstVertexY);
-        console.log(secondVertexX);
-        console.log(secondVertexY);
-        console.log(heightInput);
-
-
-
-        drawIsoscelesTriangle(firstVertexX * 10, firstVertexY * 10, secondVertexX * 10, secondVertexY * 10, heightInput * 10);
+        drawIsoscelesTriangle(firstVertexX * 15, firstVertexY * 15, secondVertexX * 15, secondVertexY * 15, heightInput * 15);
 
     }
 
@@ -187,7 +178,12 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.lineTo(p2.x, p2.y);
         ctx.lineTo(p3.x, p3.y);
         ctx.closePath();
-
+        currentBaseApex1X = p1.x;
+        currentBaseApex1Y = p1.y;
+        currentBaseApex2X = p2.x;
+        currentBaseApex2Y = p2.y;
+        currentTopApexX = p3.x;
+        currentTopApexY = p3.y;
         // Style the triangle
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#000000';
