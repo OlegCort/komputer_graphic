@@ -154,15 +154,14 @@ var greenSatur = 1;
 var magentaSatur = 1;
 
 greenSaturInput.addEventListener("input", (event) => {
-    greenSaturValue.textContent = event.target.value;
     greenSatur = event.target.value;
     adjustSaturationOnCanvas(greenSatur, magentaSatur);
 });
 
 const purpleSaturValue = document.querySelector("#magenta-saturationValue");
 const purpleSaturInput = document.querySelector("#magenta-saturation");
+console.log(purpleSaturInput.value)
 purpleSaturInput.addEventListener("input", (event) => {
-    purpleSaturValue.textContent = event.target.value;
     magentaSatur = event.target.value;
     adjustSaturationOnCanvas(greenSatur, magentaSatur);
 

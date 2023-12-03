@@ -139,47 +139,63 @@
             <h2 style="font-weight:normal;">Субтрактивна модель CMYK та перцепційна модель HSV</h2>
         </div>
 
-        <div class="inputs-container" style="grid-row: 2/5; justify-content: space-around;">
+        <div class="inputs-container" id="inputs-container-color" style="grid-row: 2/5; justify-content: space-around;">
 
-            <h3 style="font-weight:normal;">Зміна насиченості по пурпуровому за зеленому кольорах в зображенні до перетворення:</h2>
-            <label class="input-label" for="magenta-saturation">Magenta saturation:</label>
+            <h3 style="font-weight:normal; margin-top: 10px; margin-left: 10px;" id="fragment-attributes">Зміна насиченості в початковому зображенні:</h3>
+            <label class="input-label" id="input-label-magenta-saturation" for="magenta-saturation">Magenta saturation:</label>
             <input class="input-input" type="number" id="magenta-saturation" min="0" max="1" step="0.01" value="0.5"/> 
 
             <br>
-            <label for="green-saturation" class="input-label">Green saturation:</label>
+            <label for="green-saturation" id="input-label-green-saturation" class="input-label">Green saturation:</label>
             <input type="number" id="green-saturation" min="0" max="1" step="0.01" value="0.5"  class="input-input"/> 
       
+           
+            <br>
+            <h3 style="font-weight:normal; margin-top: 10px; margin-left: 10px;" id="fragment-attributes">Колір вибраного пікселя на перетвореному зображенні:</h3>
+            <textbox id="color-hsv">HSV()</textbox>
+            <br>
+            <textbox id="color-cmyk">CMYK()</textbox>
+            <br>
+            <br>
+
+
+
+            <h3 style="font-weight:normal; margin-top: -10px; margin-left: 10px;" id="fragment-attributes">Fragment Attributes:</h3>
+            <label for="hue" id="input-label-hue" class="input-label">Відтінок (Hue):</label>
+            <input type="number" id="hue" min="0" max="360" step="1" value="0" class="input-input"/>
+            <br>
+            <label for="saturation" id="input-label-saturation" class="input-label">Насиченість (Saturation):</label>
+            <input type="number" id="saturation" min="0" max="100" step="1" value="100"  class="input-input"/>
+            <br>
+            <label for="value" id="input-label-value" class="input-label" >Яскравість (Value):</label>
+            <input type="number" id="value" min="0" max="100" step="1" value="100"  class="input-input"/>
+            <br>
             <br>
             <button id="saveSVGButton">Save SVG</button>
             <button id="resetToDefault">Reset to default</button>
+            <button onclick="changeColorOnFragment()" id="changeColorOnFragment">Змінити колір</button>
             <br>
             <button id="changeColorButton">Make transition</button>
             <br>
-            <textbox id="color-hsv"></textbox>
-            <br>
-            <textbox id="color-cmyk"></textbox>
-
-            <h3 style="font-weight:normal; margin-top: -10px;">Fragment Attributes:</h3>
-            <label for="hue" class="input-label">Відтінок (Hue):</label>
-            <input type="number" id="hue" min="0" max="360" step="1" value="0" class="input-input"/>
-            <br>
-            <label for="saturation"class="input-label">Насиченість (Saturation):</label>
-            <input type="number" id="saturation" min="0" max="100" step="1" value="100"  class="input-input"/>
-            <br>
-            <label for="value"class="input-label">Яскравість (Value):</label>
-            <input type="number" id="value" min="0" max="100" step="1" value="100"  class="input-input"/>
-            <br>
-            <button onclick="changeColorOnFragment()">Змінити колір</button>
         </div>
 
         <div class="colors-container-one">
+            <div style="height: 3%;">
             <label class="color-container-label">Зображення до перетворення:</label>
+            </div>
+            <div class="colors-div-one">
             <canvas id="canvasColors"></canvas>
+            </div>
         </div>
        
         <div class="colors-container-two">
+            <div style="height: 3%;">
             <label class="color-container-label">Зображення після перетворення колірної моделі RGB-CMYK-HSV-RGB:</label>
+            </div>
+
+            <div class="colors-div-one">
             <canvas id="canvasColorsResult"></canvas> 
+            </div>
         </div>
     </div>
 
