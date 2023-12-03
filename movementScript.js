@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function drawLine() {
         var A = parseFloat(document.getElementById('lineA').value);
         var B = parseFloat(document.getElementById('lineB').value);
-        var C = parseFloat(document.getElementById('lineC').value);
+        var C = parseFloat(document.getElementById('lineC').value) * 10;
         currentA = A;
         currentB = B;
         currentC = C;
