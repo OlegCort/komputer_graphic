@@ -142,11 +142,11 @@
         <div class="inputs-container" id="inputs-container-color" style="grid-row: 2/5; justify-content: space-around;">
 
             <h3 style="font-weight:normal; margin-top: 10px; margin-left: 10px;" id="fragment-attributes">Зміна насиченості в початковому зображенні:</h3>
-            <label class="input-label" id="input-label-magenta-saturation" for="magenta-saturation">Magenta saturation:</label>
+            <label class="input-label" id="input-label-magenta-saturation" for="magenta-saturation">По пурпуровому:</label>
             <input class="input-input" type="number" id="magenta-saturation" min="0" max="1" step="0.01" value="0.5"/> 
 
             <br>
-            <label for="green-saturation" id="input-label-green-saturation" class="input-label">Green saturation:</label>
+            <label for="green-saturation" id="input-label-green-saturation" class="input-label">По зеленому:</label>
             <input type="number" id="green-saturation" min="0" max="1" step="0.01" value="0.5"  class="input-input"/> 
       
            
@@ -202,30 +202,32 @@
 
     <div class="grid-container-colors" id="movement-page">
         <div class="info-container-fractals">
-            <h1>Фізика</h1>
-            <h2 style="font-weight:normal;">Рух</h2>
+            <h1>Рухомі зображення</h1>
+            <h2 style="font-weight:normal;">Рух рівнобедреного трикутника, введеного за його двома вершинами
+                основи і довжиною висоти, проведеної до основи. Рух генерується на основі 
+                дзеркального відображення відносно довільної прямої Ax+By+C=0.</h2>
         </div>
 
         <div class="inputs-container" style="grid-row: 2/5; justify-content: space-around;">
             
-            <p style="margin-left: 20px; font-size: 100%;"><u>First Vertex Coordinates</u></p>
+            <p style="margin-left: 20px; font-size: 100%;"><u>Координати (X, Y) першої вершини рівнобедерного трикутника:</u></p>
             <label class="input-label" for="firstVertexX">X: </label>
             <input class="input-input" type="number" id="firstVertexX" value="1"/> 
             <label class="input-label" for="firstVertexY">Y: </label>
             <input class="input-input" type="number" id="firstVertexY" value="3"/> 
             <br>
-            <p style="margin-left: 20px; font-size: 100%;"><u>Second Vertex Coordinates</u></p>
+            <p style="margin-left: 20px; font-size: 100%;"><u>Координати (X, Y) другої вершини рівнобедерного трикутника:</u></p>
             <label class="input-label" for="secondVertexX">X: </label>
             <input class="input-input" type="number" id="secondVertexX" value="3"/> 
             <label class="input-label" for="secondVertexY">Y: </label>
             <input class="input-input" type="number" id="secondVertexY" value="3"/> 
             <br>
             <br>
-            <label class="input-label" for="trianglesHeight"><u>Height of the Triangle:</u> </label>
+            <label class="input-label" for="trianglesHeight"><u>Висота рівнобедерного трикутника:</u> </label>
             <input class="input-input" type="number" id="trianglesHeight" value="5"/> 
             <br>
             <br>
-            <p style="margin-left: 20px; font-size: 100%;"><u>Coordinates of the Line</u></p>
+            <p style="margin-left: 20px; font-size: 100%;"><u>Пареметри рівняння прямої A*x + B*y + C = 0</u></p>
             <label class="input-label" for="lineA">A: </label>
             <input class="input-input" type="number" id="lineA" value="1"/> 
             <label class="input-label" for="lineB">B: </label>
