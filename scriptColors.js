@@ -108,12 +108,7 @@ document.getElementById("changeColorButton").addEventListener("click", () => {
     canvasColors2.getContext("2d").putImageData(imageData, 0, 0);
 });
 
-document.getElementById('Predmety').addEventListener('click', () => {
-    document.getElementById('fractals-page').style.display = 'none';
-    document.getElementById('colors-page').style.display = document.getElementById('colors-page').style.display === 'none' ? 'grid' : 'none';
-    document.getElementById('movement-page').style.display = document.getElementById('movement-page').style.display === 'none' ? 'grid' : 'none';
 
-});
 
 
 const hsvText = document.getElementById("color-hsv");

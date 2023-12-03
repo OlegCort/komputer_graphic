@@ -63,6 +63,7 @@ body {
   border: 4px solid #D1729D;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .colors-container-two {
@@ -81,6 +82,7 @@ body {
   border: 4px solid #D1729D;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .site-header {
@@ -308,3 +310,4 @@ input {
   border-radius: 4px; 
   box-sizing: border-box;
 }
+
