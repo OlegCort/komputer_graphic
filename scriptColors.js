@@ -148,7 +148,6 @@ document.getElementById("resetToDefault").addEventListener("click", () => {
     };
 });
 
-const greenSaturValue = document.querySelector("#green-saturationValue");
 const greenSaturInput = document.querySelector("#green-saturation");
 var greenSatur = 1;
 var magentaSatur = 1;
@@ -158,7 +157,6 @@ greenSaturInput.addEventListener("input", (event) => {
     adjustSaturationOnCanvas(greenSatur, magentaSatur);
 });
 
-const purpleSaturValue = document.querySelector("#magenta-saturationValue");
 const purpleSaturInput = document.querySelector("#magenta-saturation");
 console.log(purpleSaturInput.value)
 purpleSaturInput.addEventListener("input", (event) => {
