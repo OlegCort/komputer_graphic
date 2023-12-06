@@ -108,12 +108,7 @@ document.getElementById("changeColorButton").addEventListener("click", () => {
     canvasColors2.getContext("2d").putImageData(imageData, 0, 0);
 });
 
-document.getElementById('Predmety').addEventListener('click', () => {
-    document.getElementById('fractals-page').style.display = 'none';
-    document.getElementById('colors-page').style.display = document.getElementById('colors-page').style.display === 'none' ? 'grid' : 'none';
-    document.getElementById('movement-page').style.display = document.getElementById('movement-page').style.display === 'none' ? 'grid' : 'none';
 
-});
 
 
 const hsvText = document.getElementById("color-hsv");
@@ -153,21 +148,18 @@ document.getElementById("resetToDefault").addEventListener("click", () => {
     };
 });
 
-const greenSaturValue = document.querySelector("#green-saturationValue");
 const greenSaturInput = document.querySelector("#green-saturation");
 var greenSatur = 1;
 var magentaSatur = 1;
 
 greenSaturInput.addEventListener("input", (event) => {
-    greenSaturValue.textContent = event.target.value;
     greenSatur = event.target.value;
     adjustSaturationOnCanvas(greenSatur, magentaSatur);
 });
 
-const purpleSaturValue = document.querySelector("#magenta-saturationValue");
 const purpleSaturInput = document.querySelector("#magenta-saturation");
+console.log(purpleSaturInput.value)
 purpleSaturInput.addEventListener("input", (event) => {
-    purpleSaturValue.textContent = event.target.value;
     magentaSatur = event.target.value;
     adjustSaturationOnCanvas(greenSatur, magentaSatur);
 

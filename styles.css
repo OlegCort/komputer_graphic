@@ -59,17 +59,23 @@ body {
 .colors-container-one {
   grid-column: 2 / 3;
   grid-row: 1/5;
+  height: 100%;
+  overflow: hidden;
+}
+.color-container-label{
+  font-size: 18px;
+}
+
+.colors-div-one{
   border-radius: 20px;
   border: 4px solid #D1729D;
-  height: 100%;
+  height: 910px;
   overflow: hidden;
 }
 
 .colors-container-two {
   grid-column: 3 / 4;
   grid-row: 1/5;
-  border-radius: 20px;
-  border: 4px solid #D1729D;
   height: 100%;
   overflow: hidden;
 }
@@ -81,6 +87,7 @@ body {
   border: 4px solid #D1729D;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .site-header {
@@ -168,15 +175,24 @@ body {
 }
 
 #changeColorButton {
-  margin-left: auto;
+  margin-left: 20px;
   margin-top: 20px;
   height: 40px;
   width: 80%;
   border-radius: 30px;
   background-color: #D1729D;
 }
+#changeColorOnFragment{
+  margin-left: 20px;
+  height: 40px;
+  width: 190px;
+  border-radius: 30px;
+  background-color: #D1729D;
+}
 #saveSVGButton {
-  margin-right: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+
   height: 40px;
   width: 190px;
   border-radius: 30px;
@@ -185,7 +201,7 @@ body {
 }
 
 #resetToDefault {
-  margin-right: 10px;
+  margin-left: 20px;
   height: 40px;
   width: 190px;
   border-radius: 30px;
@@ -307,4 +323,16 @@ input {
   border: 1px solid #ccc; 
   border-radius: 4px; 
   box-sizing: border-box;
+}
+
+
+
+
+
+#color-hsv, 
+#color-cmyk {
+  font-style: bold;
+  font-size: 20px;
+  margin-left: 2.5%;
+
 }

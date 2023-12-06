@@ -3,24 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedRegion = { x: 0, y: 0, width: 0, height: 0 };
     let isSelecting = false;
     
-    document.getElementById('imageInput').addEventListener('change', function(e) {
-        let canvas = document.getElementById('imageCanvas');
-        let ctx = canvas.getContext('2d');
-        let reader = new FileReader();
-        let img = new Image();
+    // document.getElementById('imageInput').addEventListener('change', function(e) {
+    //     let canvas = document.getElementById('imageCanvas');
+    //     let ctx = canvas.getContext('2d');
+    //     let reader = new FileReader();
+    //     let img = new Image();
     
-        reader.onload = function(event) {
-            let img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-                initRegionSelection(canvas, ctx, img);
-            }
-            img.src = event.target.result;
-        }
-        reader.readAsDataURL(e.target.files[0]);
-    });
+    //     reader.onload = function(event) {
+    //         let img = new Image();
+    //         img.onload = function() {
+    //             canvas.width = img.width;
+    //             canvas.height = img.height;
+    //             ctx.drawImage(img, 0, 0);
+    //             initRegionSelection(canvas, ctx, img);
+    //         }
+    //         img.src = event.target.result;
+    //     }
+    //     reader.readAsDataURL(e.target.files[0]);
+    // });
     
     function initRegionSelection(canvas, ctx, img) {
         canvas.onmousedown = function(e) {

@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const halfHeight = canvas.height / 2;
     ctx.translate(halfWidth, halfHeight);
     ctx.scale(1, -1);
-    drawAxis();
+    var intervalInPixel = 10;
+    var A;
+    var B;
+    var C;
     var currentA;
     var currentB;
     var currentC;
@@ -20,38 +23,78 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentBaseApex2Y;
     var currentTopApexX;
     var currentTopApexY;
+    var currentHeight;
+    var firstVertexX;
+    var firstVertexY;
+    var secondVertexX;
+    var secondVertexY;
+    var heightInput;
+    var isDrawn = false;
+    drawAxis();
 
 
-    
-    document.getElementById('drawButton').addEventListener('click', function() {
+
+    function drawTriangleByParameters()
+    {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
         drawAxis();
         drawTriangle();
         drawLine();
-    });
+        isDrawn = true;
+    }
 
-    document.getElementById('moveButton').addEventListener('click', function() {
+    function reflectTriangleByParameters()
+    {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
         drawAxis();
         drawLine();
         reflectTriangle(currentBaseApex1X, currentBaseApex1Y, currentBaseApex2X, currentBaseApex2Y, currentTopApexX, currentTopApexY, currentA, currentB, currentC);
+        isDrawn = true;
+    }
+
+    document.querySelector("#intervalInPixel").addEventListener("input", (event) => {
+        intervalInPixel = parseInt(event.target.value, 10);
+        if(intervalInPixel < 3){
+            alert("Довжина одиничного відрізка мусить бути більшою 2px")
+            intervalInPixel = 3;
+            event.target.value = 3;
+        }
+        console.log(intervalInPixel);
+        if(isDrawn){
+            ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
+            drawAxis();
+            drawIsoscelesTriangle(firstVertexX * intervalInPixel, firstVertexY * intervalInPixel, secondVertexX * intervalInPixel, secondVertexY * intervalInPixel, heightInput * intervalInPixel);
+            drawLinearEquation(A, B, C * intervalInPixel);
+        } else{
+            ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
+            drawAxis();
+        }
+
     });
+
+    document.getElementById('drawButton').addEventListener('click', function() {
+        drawTriangleByParameters()
+    });
+
+    document.getElementById('moveButton').addEventListener('click', function() {
+        reflectTriangleByParameters();
+    });
+
    
     function drawTriangle() {
 
-        var firstVertexX = parseInt(document.getElementById('firstVertexX').value, 10);
-        var firstVertexY = parseInt(document.getElementById('firstVertexY').value, 10);
-        var secondVertexX = parseInt(document.getElementById('secondVertexX').value, 10);
-        var secondVertexY = parseInt(document.getElementById('secondVertexY').value, 10);
-        var heightInput = parseInt(document.getElementById('trianglesHeight').value, 10);
-        drawIsoscelesTriangle(firstVertexX * 15, firstVertexY * 15, secondVertexX * 15, secondVertexY * 15, heightInput * 15);
+        firstVertexX = parseFloat(document.getElementById('firstVertexX').value, 10);
+        firstVertexY = parseFloat(document.getElementById('firstVertexY').value, 10);
+        secondVertexX = parseFloat(document.getElementById('secondVertexX').value, 10);
+        secondVertexY = parseFloat(document.getElementById('secondVertexY').value, 10);
+        heightInput = parseFloat(document.getElementById('trianglesHeight').value, 10);
+        drawIsoscelesTriangle(firstVertexX * intervalInPixel, firstVertexY * intervalInPixel, secondVertexX * intervalInPixel, secondVertexY * intervalInPixel, heightInput * intervalInPixel);
 
     }
 
 
+
     function drawIsoscelesTriangle(baseApex1X, baseApex1Y, baseApex2X, baseApex2Y, height) {
-        const canvas = document.getElementById("movementCanvas");
-        const ctx = canvas.getContext('2d');
         if (canvas.getContext) {
             // Calculate the midpoint of the base
             var midX = (baseApex1X + baseApex2X) / 2;
@@ -60,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // Calculate the top apex coordinates
             var dx = baseApex2X - baseApex1X;
             var dy = baseApex2Y - baseApex1Y;
-            var distBase = Math.sqrt(dx * dx + dy * dy);
             var angle = Math.atan2(dy, dx);
     
             var topApexX = midX - height * Math.sin(angle);
@@ -83,48 +125,67 @@ document.addEventListener("DOMContentLoaded", function () {
             currentBaseApex2X = baseApex2X;
             currentBaseApex2Y = baseApex2Y;
             currentTopApexX = topApexX;
-            currentTopApexY = topApexY
+            currentTopApexY = topApexY;
+            currentHeight = height;
         }
     }
+
 
     function drawAxis() {
         const width = ctx.canvas.width;
         const height = ctx.canvas.height;
-        const halfWidth = width / 2;
-        const halfHeight = height / 2;
-    
-        // Ensure the transformations are applied only within this function
-        ctx.save();
-    
-        // Clear any existing transformations by resetting to the default state
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
     
         // Draw X-axis
         ctx.beginPath();
-        ctx.moveTo(0, halfHeight);
-        ctx.lineTo(width, halfHeight);
+        ctx.moveTo(-width / 2, 0);
+        ctx.lineTo(width / 2, 0);
     
         // Draw Y-axis
-        ctx.moveTo(halfWidth, 0);
-        ctx.lineTo(halfWidth, height);
+        ctx.moveTo(0, -height / 2);
+        ctx.lineTo(0, height / 2);
+    
+        // Drawing marks on the axes, starting from the center
+        for (let x = 0; x <= width / 2; x += intervalInPixel) {
+            ctx.moveTo(x, -5);
+            ctx.lineTo(x, 5);
+            if (x !== 0) { // Ensure we don't draw at the center twice
+                ctx.moveTo(-x, -5);
+                ctx.lineTo(-x, 5);
+            }
+        }
+    
+        // Drawing marks on the Y axis, starting from the center
+        for (let y = 0; y <= height / 2; y += intervalInPixel) {
+            ctx.moveTo(-5, y);
+            ctx.lineTo(5, y);
+            if (y !== 0) { // Ensure we don't draw at the center twice
+                ctx.moveTo(-5, -y);
+                ctx.lineTo(5, -y);
+            }
+        }
     
         ctx.strokeStyle = 'black';
         ctx.stroke();
         ctx.closePath();
     
-        // Restore the transformations that were saved
-        ctx.restore();
+        // Drawing 'X' and 'Y' at the ends of the axes
+        // Adjust positions if needed
+        ctx.font = "20px Arial";
+        ctx.scale(1, -1);  // Temporary flip to draw text upright
+        ctx.fillText("X", width / 2 - 20, -10);
+        ctx.fillText("Y", 10, -height / 2 + 20);
+        ctx.scale(1, -1);  // Flip back
     }
     
 
     function drawLine() {
-        var A = parseFloat(document.getElementById('lineA').value);
-        var B = parseFloat(document.getElementById('lineB').value);
-        var C = parseFloat(document.getElementById('lineC').value);
+        A = parseFloat(document.getElementById('lineA').value);
+        B = parseFloat(document.getElementById('lineB').value);
+        C = parseFloat(document.getElementById('lineC').value);
         currentA = A;
         currentB = B;
-        currentC = C;
-        drawLinearEquation(A, B, C);
+        currentC = C * intervalInPixel;
+        drawLinearEquation(A, B, C * intervalInPixel);
     }
 
     
@@ -184,6 +245,12 @@ document.addEventListener("DOMContentLoaded", function () {
         currentBaseApex2Y = p2.y;
         currentTopApexX = p3.x;
         currentTopApexY = p3.y;
+
+        firstVertexX = currentBaseApex1X/intervalInPixel;
+        firstVertexY = currentBaseApex1Y/intervalInPixel;
+        secondVertexX = currentBaseApex2X/intervalInPixel;
+        secondVertexY = currentBaseApex2Y/intervalInPixel;
+        heightInput = -heightInput;
         // Style the triangle
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#000000';
