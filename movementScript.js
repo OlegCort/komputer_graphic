@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
    
     function drawTriangle() {
 
-        firstVertexX = parseInt(document.getElementById('firstVertexX').value, 10);
-        firstVertexY = parseInt(document.getElementById('firstVertexY').value, 10);
-        secondVertexX = parseInt(document.getElementById('secondVertexX').value, 10);
-        secondVertexY = parseInt(document.getElementById('secondVertexY').value, 10);
-        heightInput = parseInt(document.getElementById('trianglesHeight').value, 10);
+        firstVertexX = parseFloat(document.getElementById('firstVertexX').value, 10);
+        firstVertexY = parseFloat(document.getElementById('firstVertexY').value, 10);
+        secondVertexX = parseFloat(document.getElementById('secondVertexX').value, 10);
+        secondVertexY = parseFloat(document.getElementById('secondVertexY').value, 10);
+        heightInput = parseFloat(document.getElementById('trianglesHeight').value, 10);
         drawIsoscelesTriangle(firstVertexX * intervalInPixel, firstVertexY * intervalInPixel, secondVertexX * intervalInPixel, secondVertexY * intervalInPixel, heightInput * intervalInPixel);
 
     }
