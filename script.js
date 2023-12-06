@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('colors-header').addEventListener('click', () => {
         document.getElementById('fractals-page').style.display = 'none';
         document.getElementById('colors-page').style.display = 'grid';
-        document.getElementById('movement-page').style.display = 'grid';
+        document.getElementById('movement-page').style.display = 'none';
         document.getElementById('learning-materials').style.display = 'none';
     });
     document.getElementById('movement-header').addEventListener('click', () => {
