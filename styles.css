@@ -189,7 +189,7 @@ body {
   border-radius: 30px;
   background-color: #D1729D;
 }
-#saveSVGButton {
+#saveSVGButton1, #saveSVGButton2, #saveSVGButton3 {
   margin-left: 20px;
   margin-bottom: 20px;
 
