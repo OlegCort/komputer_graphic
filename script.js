@@ -180,7 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
         
     }
       
-    document.getElementById('saveSVGButton').addEventListener('click', saveSvgAsImage);
+    document.getElementById('saveSVGButton1').addEventListener('click', saveSvgAsImage);
+    document.getElementById('saveSVGButton2').addEventListener('click', saveSvgAsImage);
+    document.getElementById('saveSVGButton3').addEventListener('click', saveSvgAsImage);
     
     const iterationsValue = document.querySelector("#iterationsValue");
     const iterationsInput = document.querySelector("#iterations");
