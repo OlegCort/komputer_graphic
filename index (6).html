@@ -10,13 +10,15 @@
     <script src="movementScript.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+ <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 
 
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body style="overflow-y:auto;">
+<body style="overflow-y:hidden;">
 
     <header class="site-header">
         <div class="logo-nav-bar">
@@ -61,31 +63,34 @@
                 <label for="fractalTypeSelect">Виберіть вид фракталу:</label>
                 <select name="fractalTypeSelect" id="fractalTypeSelect">
                   <option value="koch-snowflake">Сніжинка Коха</option>
-                  <option value="tan-frac">Tan(z^2)*z Фрактал</option>
-                  <option value="tricorn-frac">Tan(z^3)*z Фрактал</option>                  
+                  <option value="tan-frac"><span id="ffSpan">Тангенціальний Фрактал №1</option>
+                  <option value="tricorn-frac">Тангенціальний Фрактал №2</option>                  
                 </select>
             </div>
+            
 
             <div id="inputs-divs">
                 <div id="kochInputs">
-                    <label>Виберіть базову фігуру:</label>
-                    <div>
-                    <input type="radio" id="radioTriangle" name="contact" value="triangle" checked/>
-                    <label for="contactChoice1">Трикутник</label>
-            
-                    <input type="radio" id="radioCube" name="contact" value="cube" />
-                    <label for="contactChoice2">Квадрат</label>
+                    
+                    <div style="margin-top: 20px;">
+                        <label> Виберіть базову фігуру:</label>
+                        <br>
+                        <input type="radio" id="radioTriangle" name="contact" value="triangle" checked/>
+                        <label for="contactChoice1">Трикутник</label>
+                
+                        <input type="radio" id="radioCube" name="contact" value="cube" />
+                        <label for="contactChoice2">Квадрат</label>
                     </div>
 
-                    <div>
-                        <label for="iterations">Ітерації:</label>
+                    <div style="margin-top: 20px;">
+                        <label for="iterations">Оберіть кількість ітерацій (0 - 6):</label>
                         <br>
                         <input type="range" id="iterations" name="iterations" min="0" max="6" step="1" value="0"/> 
                         <output id="iterationsValue"></output>
                     </div>
             
-                    <div>
-                        <label for="divisionRatio">Відношення розбиття сторони:</label>
+                    <div style="margin-top: 20px;">
+                        <label for="divisionRatio">Оберіть відношення розбиття сторони:<br>(Відношення довжини основи нового фраграмента до сторони фігури)</label>
                         <br>
                         <input type="range" id="divisionRatio" name="divisionRatio" min="0.1" max="0.6" step="0.01" value="0.5"/> 
                         <output id="divisionRatioValue"></output>
@@ -94,10 +99,21 @@
             
                 <div id="tgInputs" hidden>
                     <div>
-                        <label for="scale">Scale:</label>
-                        <br>
-                        <input type="range" id="scale" name="scale" min="1" max="4" step="1" value="1"/> 
-                        <output id="scaleValue"></output>
+                        <div id="ffEq" style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                            Рівняння фракталу:<br><br>\( \tan(z^2) \cdot z \)
+                        </div>
+
+                        <div id="sfEq" style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                            Рівняння фракталу:<br><br>\( \tan(z^3) \cdot z \)
+                        </div>
+
+                        <div style="margin-left: 20px; margin-top: 30px; margin-bottom: 10px;"> 
+                            <label for="scale">Оберіть рівень зближення<br>(1 - найбільш віддалено, 4 - найбільш приближено):</label>
+                            <br><br>
+                            <input type="range" id="scale" name="scale" min="1" max="4" step="1" value="1"/> 
+                            <output id="scaleValue"></output>
+                        </div>
+                        
                     </div>
                 
                 </div>
@@ -129,7 +145,7 @@
             <h2 style="font-weight:normal;">Субтрактивна модель CMYK та перцепційна модель HSV</h2>
         </div>
 
-        <div class="inputs-container" id="inputs-container-color" style="grid-row: 2/5; justify-content: space-around;">
+        <div class="inputs-container" id="inputs-container-color" style="grid-row: 2/5; justify-content: space-around; overflow: scroll;">
 
             <h3 style="font-weight:normal; margin-top: 10px; margin-left: 10px;" id="fragment-attributes">Зміна насиченості в початковому зображенні:</h3>
             <label class="input-label" id="input-label-magenta-saturation" for="magenta-saturation">По пурпуровому:</label>
@@ -164,26 +180,25 @@
             <button id="saveSVGButton2">Save</button>
             <button id="resetToDefault">Reset to default</button>
             <button onclick="changeColorOnFragment()" id="changeColorOnFragment">Змінити колір</button>
-            <br>
             <button id="changeColorButton">Перетворення зображення</button>
             <br>
         </div>
 
         <div class="colors-container-one">
-            <div style="height: 3%;">
+            <div style="height: 6%;">
             <label class="color-container-label">Зображення до перетворення:</label>
             </div>
-            <div class="colors-div-one">
+            <div class="colors-div-one" style="height: 93%;">
             <canvas id="canvasColors"></canvas>
             </div>
         </div>
        
         <div class="colors-container-two">
-            <div style="height: 3%;">
-            <label class="color-container-label">Зображення після перетворення колірної моделі RGB-CMYK-HSV-RGB:</label>
+            <div style="height: 6%;">
+            <label class="color-container-label">Зображення після перетворення колірної моделі<br> RGB-CMYK-HSV-RGB:</label>
             </div>
 
-            <div class="colors-div-one">
+            <div class="colors-div-one" style="height: 93%;">
             <canvas id="canvasColorsResult"></canvas> 
             </div>
         </div>
@@ -196,7 +211,7 @@
             <h3 style="font-weight:normal;">Рух рівнобедреного трикутника, введеного за його двома вершинами основи і довжиною висоти, проведеної до основи. Рух генерується на основі дзеркального відображення відносно довільної прямої Ax+By+C=0.</h3>
         </div>
 
-        <div class="inputs-container" style="grid-row: 2/5; justify-content: space-around;">
+        <div class="inputs-container" style="grid-row: 2/5; justify-content: space-around; overflow: scroll;">
             
             <p style="margin-left: 20px; font-size: 100%;"><u>Координати (X, Y) першої вершини рівнобедерного трикутника:</u></p>
             <label class="input-label" for="firstVertexX">X: </label>

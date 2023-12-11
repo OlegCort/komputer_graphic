@@ -16,7 +16,7 @@ body {
 .grid-container-colors{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr) 0.05fr;
+  grid-template-rows: repeat(4, 1fr) 0.1fr;
   padding: 10px;
   height: 95vh; 
   column-gap: 50px;
@@ -176,11 +176,11 @@ body {
 
 #changeColorButton {
   margin-left: 20px;
-  margin-top: 20px;
   height: 40px;
-  width: 80%;
+  width: 190px;
   border-radius: 30px;
   background-color: #D1729D;
+  margin-bottom: 10px;
 }
 #changeColorOnFragment{
   margin-left: 20px;

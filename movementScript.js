@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    var moving = false;
     const canvas = document.getElementById("movementCanvas");
     const ctx = canvas.getContext('2d');
     ctx.lineWidth = 2;
@@ -76,8 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
         drawTriangleByParameters()
     });
 
+    function reflectPeriodically() {
+        if(moving)
+            reflectTriangleByParameters();
+        setTimeout(reflectPeriodically, 500);
+    }
+    reflectPeriodically();
     document.getElementById('moveButton').addEventListener('click', function() {
-        reflectTriangleByParameters();
+        moving = !moving;
     });
 
    
@@ -192,11 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function drawLinearEquation(A, B, C) {
         ctx.beginPath();
+
+            let x1 = -halfWidth;
+            let y1 = (-C - A * x1) / B;
+            let x2 = halfWidth;
+            let y2 = (-C - A * x2) / B;     
     
-        let x1 = -halfWidth;
-        let y1 = (-C - A * x1) / B;
-        let x2 = halfWidth;
-        let y2 = (-C - A * x2) / B;
     
         ctx.beginPath();
         ctx.moveTo(x1, y1);
@@ -217,21 +225,27 @@ document.addEventListener("DOMContentLoaded", function () {
             [-2 * A * B, 1 - 2 * B * B, -2 * B * C],
             [0, 0, 1]
         ];
+
+        const moveMatrix = [
+            [1, 0, A],
+            [0, 1, B],
+            [0, 0, 1]
+        ];
     
         // Function to apply the reflection matrix to a point
         function reflectPoint(x, y) {
             const reflected = [
-                reflectionMatrix[0][0] * x + reflectionMatrix[0][1] * y + reflectionMatrix[0][2],
+                moveMatrix[0][-0]*reflectionMatrix[0][0] * x + reflectionMatrix[0][1] * y + reflectionMatrix[0][2],
                 reflectionMatrix[1][0] * x + reflectionMatrix[1][1] * y + reflectionMatrix[1][2],
                 1
             ];
-            return { x: reflected[0], y: reflected[1] };
+            return { x: reflected[0], y: reflected[1]};        
         }
-    
+
         // Reflect each point of the triangle
-        const p1 = reflectPoint(x1, y1);
-        const p2 = reflectPoint(x2, y2);
-        const p3 = reflectPoint(x3, y3);
+        const p1 = reflectPoint(x1 - 2* A * intervalInPixel, y1);
+        const p2 = reflectPoint(x2 - 2* A * intervalInPixel, y2);
+        const p3 = reflectPoint(x3 - 2* A * intervalInPixel, y3);
 
         // Draw the triangle
         ctx.beginPath();
@@ -258,6 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
         
 
     }
+
+    
     
 });
 
