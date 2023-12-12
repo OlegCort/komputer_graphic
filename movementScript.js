@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     drawAxis();
 
 
-
+//Drawing Triangle
     function drawTriangleByParameters()
     {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         drawLine();
         isDrawn = true;
     }
-
+//Moving and reflecting the Triangle
     function reflectTriangleByParameters()
     {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    //Drawing XY axis
     function drawAxis() {
         const width = ctx.canvas.width;
         const height = ctx.canvas.height;
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.scale(1, -1);  // Flip back
     }
     
-
+//Drawing the linear equation
     function drawLine() {
         A = parseFloat(document.getElementById('lineA').value);
         B = parseFloat(document.getElementById('lineB').value);

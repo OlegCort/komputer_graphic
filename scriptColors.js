@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+
+//RGB to HSV transission
 function RGBToHSV(r, g, b) {
     r /= 255, g /= 255, b /= 255;
 
@@ -26,6 +28,7 @@ function RGBToHSV(r, g, b) {
     return { h, s, v };
 }
 
+//HSV to RGB transission
 function    HSVToRGB(h, s, v) {
     var r, g, b;
 
@@ -47,6 +50,7 @@ function    HSVToRGB(h, s, v) {
     return [ r * 255, g * 255, b * 255 ];
 }
 
+//RGB to CMYK transission
 function rgbToCmyk(r, g, b) {
     const red = r / 255;
     const green = g / 255;
@@ -66,6 +70,7 @@ function rgbToCmyk(r, g, b) {
     return { c, m, y, k };
 }
 
+//CMYK to RGB transission
 function cmykToRgb(c, m, y, k) {
     const cyan = c / 100;
     const magenta = m / 100;
@@ -85,10 +90,6 @@ const ctxColors = canvasColors.getContext("2d");
 const imgColors = new Image();
 imgColors.src = "pexels-alexander-grey-1191710.jpg";
 imgColors.onload = function() {
-    //canvasColors.width = imgColors.width; 
-    //canvasColors.height = imgColors.height;
-    //canvasColors2.width = imgColors.width; 
-    //canvasColors2.height = imgColors.height;
     ctxColors.drawImage(imgColors, 0, 0, canvasColors.width, canvasColors.height);
 };
 
@@ -114,7 +115,7 @@ document.getElementById("changeColorButton").addEventListener("click", () => {
 
 
 
-
+//Displaying color coordinates on click
 const hsvText = document.getElementById("color-hsv");
 const cmykText = document.getElementById("color-cmyk");
 function pick(event){
@@ -169,18 +170,21 @@ purpleSaturInput.addEventListener("input", (event) => {
 
 });
 
+//Check if pixel magenta
 function isMagenta(hsv) {
     const magentaHueMin = 301; 
     const magentaHueMax = 360; 
     return hsv.h >= magentaHueMin / 360 && hsv.h <= magentaHueMax / 360;
 }
 
+//Check if pixel green
 function isGreen(hsv) {
     const greenHueMin = 121; 
     const greenHueMax = 180;
     return hsv.h >= greenHueMin / 360 && hsv.h <= greenHueMax / 360;
 }
 
+//Ajusting saturation on input
 function adjustSaturationOnCanvas(greenSaturation, magentaSaturation) {
     const imageData = ctxColors.getImageData(0, 0, canvasColors.width, canvasColors.height);
     const data = imageData.data;
