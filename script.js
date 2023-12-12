@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("fractal");
     const renderBut = document.getElementById("renderButton");
     var scale = 1;
-    
+
 
     document.getElementById('fractals-header').addEventListener('click', () => {
         document.getElementById('fractals-page').style.display = 'grid';
@@ -225,6 +225,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 tgInputs.hidden = true;
                 break;
             default:
+                if(event.target.value === 'tan-frac') {
+                    document.getElementById('ffEq').hidden = false;
+                    document.getElementById('sfEq').hidden = true;
+                } else {
+                    document.getElementById('ffEq').hidden = true;
+                    document.getElementById('sfEq').hidden = false;
+                }
                 kochInputs.hidden = true;
                 tgInputs.hidden = false;
                 break;
