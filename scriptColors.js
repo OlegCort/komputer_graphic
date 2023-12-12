@@ -85,6 +85,10 @@ const ctxColors = canvasColors.getContext("2d");
 const imgColors = new Image();
 imgColors.src = "pexels-alexander-grey-1191710.jpg";
 imgColors.onload = function() {
+    canvasColors.width = imgColors.width; 
+    canvasColors.height = imgColors.height;
+    canvasColors2.width = imgColors.width; 
+    canvasColors2.height = imgColors.height;
     ctxColors.drawImage(imgColors, 0, 0, canvasColors.width, canvasColors.height);
 };
 

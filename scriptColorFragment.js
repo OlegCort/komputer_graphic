@@ -1,97 +1,88 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
+
     let selectedRegion = { x: 0, y: 0, width: 0, height: 0 };
     let isSelecting = false;
+    let canvas = document.getElementById('canvasColors');
+
+    let ctx = canvas.getContext('2d');
+    let img = new Image();
+    img.src = "pexels-alexander-grey-1191710.jpg";
     
-    // document.getElementById('imageInput').addEventListener('change', function(e) {
-    //     let canvas = document.getElementById('imageCanvas');
-    //     let ctx = canvas.getContext('2d');
-    //     let reader = new FileReader();
-    //     let img = new Image();
-    
-    //     reader.onload = function(event) {
-    //         let img = new Image();
-    //         img.onload = function() {
-    //             canvas.width = img.width;
-    //             canvas.height = img.height;
-    //             ctx.drawImage(img, 0, 0);
-    //             initRegionSelection(canvas, ctx, img);
-    //         }
-    //         img.src = event.target.result;
-    //     }
-    //     reader.readAsDataURL(e.target.files[0]);
-    // });
-    
-    function initRegionSelection(canvas, ctx, img) {
-        canvas.onmousedown = function(e) {
-            isSelecting = true;
-            selectedRegion.x = e.offsetX;
-            selectedRegion.y = e.offsetY;
-            selectedRegion.width = 0; // Reset the width
-            selectedRegion.height = 0; // Reset the height
-        }
-    
-        canvas.onmousemove = function(e) {
-            if (!isSelecting) return;
-            selectedRegion.width = e.offsetX - selectedRegion.x;
-            selectedRegion.height = e.offsetY - selectedRegion.y;
-            drawRegion(ctx, canvas, img); // Pass the image to drawRegion
-        }
-    
-        canvas.onmouseup = function(e) {
-            isSelecting = false;
-            drawRegion(ctx, canvas, img); // Draw one last time to fix the rectangle if needed
-        }
-    }
-    
+    canvas.onmousedown = function(e) {
+        isSelecting = true;
+        const rect = canvas.getBoundingClientRect();
+        selectedRegion.x = e.clientX - rect.left;
+        selectedRegion.y = e.clientY - rect.top;
+        selectedRegion.width = 0;
+        selectedRegion.height = 0;
+        drawRegion(ctx, canvas, img);
+    };
+
+    canvas.onmousemove = function(e) {
+        if (!isSelecting) return;
+        const rect = canvas.getBoundingClientRect();
+        selectedRegion.width = e.clientX - rect.left - selectedRegion.x;
+        selectedRegion.height = e.clientY - rect.top - selectedRegion.y;
+        drawRegion(ctx, canvas, img);
+    };
+
+    canvas.onmouseup = function(e) {
+        isSelecting = false;
+        drawRegion(ctx, canvas, img);
+    };
+
+
     function drawRegion(ctx, canvas, img) {
-        // Clear the canvas before redrawing everything
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Redraw the image
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        // Draw the selection rectangle if we are in selection mode
+        ctx.drawImage(img, 0, 0);
+    
         if (isSelecting) {
             ctx.strokeStyle = 'red';
-            ctx.lineWidth = 2; // Set the line width if needed
-            ctx.setLineDash([6]); // Optional: create a dashed line for the rectangle
-            ctx.strokeRect(selectedRegion.x, selectedRegion.y, selectedRegion.width, selectedRegion.height);
+            ctx.lineWidth = 10;
+            ctx.setLineDash([6]);
+                ctx.strokeRect(
+                selectedRegion.x,
+                selectedRegion.y,
+                selectedRegion.width,
+                selectedRegion.height
+            );
         }
     }
-          
-    function changeColor() {
-        let hueChange = parseInt(document.getElementById('hue').value);
+    
+
+    document.getElementById("changeColorOnFragment").addEventListener("click", () => {
         let saturationChange = parseInt(document.getElementById('saturation').value) / 100;
         let valueChange = parseInt(document.getElementById('value').value) / 100;
-    
-    
-        let canvas = document.getElementById('imageCanvas');
-        let ctx = canvas.getContext('2d');
-        let imageData = ctx.getImageData(selectedRegion.x, selectedRegion.y, selectedRegion.width, selectedRegion.height);
+
+        let currentScaleX = canvas.width / img.width;
+        let currentScaleY = canvas.height / img.height;
+        let imageData = ctx.getImageData(
+            selectedRegion.x * currentScaleX,
+            selectedRegion.y * currentScaleY,
+            selectedRegion.width * currentScaleX,
+            selectedRegion.height * currentScaleY
+        );
         let data = imageData.data;
-    
-    
+
         for (let i = 0; i < data.length; i += 4) {
             let r = data[i];
             let g = data[i + 1];
             let b = data[i + 2];
-        
+
             let hsv = RGBToHSV(r, g, b);
-            hsv.h += hueChange / 360;
-            if (hsv.h > 1) hsv.h -= 1;
             hsv.s *= saturationChange;
             hsv.v *= valueChange;
-        
+
             let rgb = HSVToRGB(hsv.h, hsv.s, hsv.v);
             data[i] = rgb[0];
             data[i + 1] = rgb[1];
             data[i + 2] = rgb[2];
         }
-      
-        ctx.putImageData(imageData, selectedRegion.x, selectedRegion.y);
-    }
-    
+
+        ctx.putImageData(imageData, selectedRegion.x * currentScaleX, selectedRegion.y * currentScaleY);
+
+    });
+
     function RGBToHSV(r, g, b) {
         r /= 255, g /= 255, b /= 255;
     
@@ -139,7 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return [ r * 255, g * 255, b * 255 ];
     }
     
-               
+
     
 });
-    
+
+
+
