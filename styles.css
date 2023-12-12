@@ -2,7 +2,8 @@ body {
   margin:0;
   padding:0;
   overflow: hidden;
-  }
+  height:100%;
+}
 .grid-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -323,6 +324,11 @@ input {
   border: 1px solid #ccc; 
   border-radius: 4px; 
   box-sizing: border-box;
+}
+
+.learning-materials{
+  overflow-y:scroll; 
+  height: 650px;
 }
 
 
