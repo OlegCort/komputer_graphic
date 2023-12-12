@@ -7,30 +7,36 @@ document.addEventListener("DOMContentLoaded", function () {
     let ctx = canvas.getContext('2d');
     let img = new Image();
     img.src = "pexels-alexander-grey-1191710.jpg";
+
+    // function initRegionSelection(canvas, ctx, img) {
+    //     //canvas.width = img.naturalWidth;
+    //     //canvas.height = img.naturalHeight;
     
-    canvas.onmousedown = function(e) {
-        isSelecting = true;
-        const rect = canvas.getBoundingClientRect();
-        selectedRegion.x = e.clientX - rect.left;
-        selectedRegion.y = e.clientY - rect.top;
-        selectedRegion.width = 0;
-        selectedRegion.height = 0;
-        drawRegion(ctx, canvas, img);
-    };
+    //     canvas.onmousedown = function(e) {
+    //         isSelecting = true;
+    //         const rect = canvas.getBoundingClientRect();
+    //         selectedRegion.x = e.clientX - rect.left;
+    //         selectedRegion.y = e.clientY - rect.top;
+    //         selectedRegion.width = 0;
+    //         selectedRegion.height = 0;
+    //         drawRegion(ctx, canvas, img);
+    //     };
+    
+    //     canvas.onmousemove = function(e) {
+    //         if (!isSelecting) return;
+    //         const rect = canvas.getBoundingClientRect();
+    //         selectedRegion.width = e.clientX - rect.left - selectedRegion.x;
+    //         selectedRegion.height = e.clientY - rect.top - selectedRegion.y;
+    //         drawRegion(ctx, canvas, img);
+    //     };
+    
+    //     canvas.onmouseup = function(e) {
+    //         isSelecting = false;
+    //         drawRegion(ctx, canvas, img);
+    //     };
+    // }
 
-    canvas.onmousemove = function(e) {
-        if (!isSelecting) return;
-        const rect = canvas.getBoundingClientRect();
-        selectedRegion.width = e.clientX - rect.left - selectedRegion.x;
-        selectedRegion.height = e.clientY - rect.top - selectedRegion.y;
-        drawRegion(ctx, canvas, img);
-    };
-
-    canvas.onmouseup = function(e) {
-        isSelecting = false;
-        drawRegion(ctx, canvas, img);
-    };
-
+    //initRegionSelection(canvas, ctx, img);
 
     function drawRegion(ctx, canvas, img) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -38,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
         if (isSelecting) {
             ctx.strokeStyle = 'red';
-            ctx.lineWidth = 10;
+            ctx.lineWidth = 2;
             ctx.setLineDash([6]);
                 ctx.strokeRect(
                 selectedRegion.x,
@@ -51,6 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     document.getElementById("changeColorOnFragment").addEventListener("click", () => {
+        changeColor();
+    })
+
+    function changeColor() {
         let saturationChange = parseInt(document.getElementById('saturation').value) / 100;
         let valueChange = parseInt(document.getElementById('value').value) / 100;
 
@@ -81,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ctx.putImageData(imageData, selectedRegion.x * currentScaleX, selectedRegion.y * currentScaleY);
 
-    });
+    }
 
     function RGBToHSV(r, g, b) {
         r /= 255, g /= 255, b /= 255;
