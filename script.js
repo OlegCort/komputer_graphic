@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const renderBut = document.getElementById("renderButton");
     var scale = 1;
 
-
+//Navigation
     document.getElementById('fractals-header').addEventListener('click', () => {
         document.getElementById('fractals-page').style.display = 'grid';
         document.getElementById('colors-page').style.display = 'none';
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+//Complex calculations
     function complexMultiply(a, b) {
         const real = a[0] * b[0] - a[1] * b[1];
         const imag = a[0] * b[1] + a[1] * b[0];
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return [realPart, imagPart];
     }
     
+//tan(z^2)*z Fractal
     async function drawTanFractal() {
         while (canvas.firstChild) {
             canvas.removeChild(canvas.firstChild);
@@ -95,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-    
+//tan(z^3)*z Fractal
     async function drawTan2Fractal() {
         while (canvas.firstChild) {
             canvas.removeChild(canvas.firstChild);
@@ -146,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-    
+//Saving as file
     function saveSvgAsImage() {
         if(document.getElementById('colors-page').style.display === 'grid'){ 
             var canvas = document.getElementById('canvasColors');
@@ -216,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const radioCube = document.querySelector('#radioCube');
     
     
-    
+//Koch on parameters change
     fractalTypeSelect.addEventListener("change", (event) => {
         var fractalType = event.target.value;
         switch(fractalType){
@@ -240,7 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
     iterationsInput.addEventListener("input", drawSnowflake);
     
-    
+//Koch snowflake algorythm on parameters change
+
     function drawKochCurve(x1, y1, x2, y2, iterations) {
         if (iterations === 0) {
             return `L ${x2} ${y2} `;
@@ -327,17 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
             default:
                 break;
         }  
-    }); 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    });     
 });
     

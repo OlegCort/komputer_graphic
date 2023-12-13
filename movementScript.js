@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     drawAxis();
 
 
-
+//Drawing Triangle
     function drawTriangleByParameters()
     {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         drawLine();
         isDrawn = true;
     }
-
+//Moving and reflecting the Triangle
     function reflectTriangleByParameters()
     {
         ctx.clearRect(-canvas.width /2 , -canvas.height /2 , canvas.width, canvas.height);
@@ -52,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
         reflectTriangle(currentBaseApex1X, currentBaseApex1Y, currentBaseApex2X, currentBaseApex2Y, currentTopApexX, currentTopApexY, currentA, currentB, currentC);
         isDrawn = true;
     }
+    
 
+;
     document.querySelector("#intervalInPixel").addEventListener("input", (event) => {
         intervalInPixel = parseInt(event.target.value, 10);
         if(intervalInPixel < 3){
@@ -138,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    //Drawing XY axis
     function drawAxis() {
         const width = ctx.canvas.width;
         const height = ctx.canvas.height;
@@ -184,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.scale(1, -1);  // Flip back
     }
     
-
+//Drawing the linear equation
     function drawLine() {
         A = parseFloat(document.getElementById('lineA').value);
         B = parseFloat(document.getElementById('lineB').value);
