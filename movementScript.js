@@ -52,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
         reflectTriangle(currentBaseApex1X, currentBaseApex1Y, currentBaseApex2X, currentBaseApex2Y, currentTopApexX, currentTopApexY, currentA, currentB, currentC);
         isDrawn = true;
     }
+    
 
+;
     document.querySelector("#intervalInPixel").addEventListener("input", (event) => {
         intervalInPixel = parseInt(event.target.value, 10);
         if(intervalInPixel < 3){
