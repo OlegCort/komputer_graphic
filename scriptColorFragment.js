@@ -57,20 +57,21 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     document.getElementById("changeColorOnFragment").addEventListener("click", () => {
+      console.log("fdsfewf");
         changeColor();
     })
 
     function changeColor() {
         let saturationChange = parseInt(document.getElementById('saturation').value) / 100;
         let valueChange = parseInt(document.getElementById('value').value) / 100;
+        let hueChange = parseInt(document.getElementById('hue').value) / 360;
+        console.log(hueChange);
 
-        let currentScaleX = canvas.width / img.width;
-        let currentScaleY = canvas.height / img.height;
         let imageData = ctx.getImageData(
-            selectedRegion.x * currentScaleX,
-            selectedRegion.y * currentScaleY,
-            selectedRegion.width * currentScaleX,
-            selectedRegion.height * currentScaleY
+            selectedRegion.x ,//* currentScaleX,
+            selectedRegion.y ,//* currentScaleY,
+            selectedRegion.width,// * currentScaleX,
+            selectedRegion.height// * currentScaleY
         );
         let data = imageData.data;
 
@@ -82,6 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let hsv = RGBToHSV(r, g, b);
             hsv.s *= saturationChange;
             hsv.v *= valueChange;
+            hsv.h += hueChange;
+            
 
             let rgb = HSVToRGB(hsv.h, hsv.s, hsv.v);
             data[i] = rgb[0];
@@ -89,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             data[i + 2] = rgb[2];
         }
 
-        ctx.putImageData(imageData, selectedRegion.x * currentScaleX, selectedRegion.y * currentScaleY);
+        ctx.putImageData(imageData, selectedRegion.x , selectedRegion.y );
 
     }
 
