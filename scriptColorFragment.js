@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     img.src = "pexels-alexander-grey-1191710.jpg";
 
     function initRegionSelection(canvas, ctx, img) {
-        //canvas.width = img.naturalWidth;
-        //canvas.height = img.naturalHeight;
-    
         canvas.onmousedown = function(e) {
             isSelecting = true;
             const rect = canvas.getBoundingClientRect();
@@ -68,10 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(hueChange);
 
         let imageData = ctx.getImageData(
-            selectedRegion.x ,//* currentScaleX,
-            selectedRegion.y ,//* currentScaleY,
-            selectedRegion.width,// * currentScaleX,
-            selectedRegion.height// * currentScaleY
+            selectedRegion.x ,
+            selectedRegion.y ,
+            selectedRegion.width,
+            selectedRegion.height
         );
         let data = imageData.data;
 
